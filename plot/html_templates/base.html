@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% block title %}{% endblock %}</title>
+
+<link
+    href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.css"
+    rel="stylesheet" type="text/css">
+<link
+    href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.4.min.css"
+    rel="stylesheet" type="text/css">
+
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.4.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.4.min.js"></script>
+
+<style>
+    #map {
+        float: left; 
+        width: 700px; 
+        height: 500px;
+    }
+    #wrapper {
+        float: left;
+        width: 200px;
+    }
+    #list {
+        background: #eee;
+        list-style: none; 
+        padding: 0; 
+    }
+    #similar {
+        background: #000; 
+    }
+</style>
+
+{% block scripts %}{% endblock %}
+
+</head>
+<body>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

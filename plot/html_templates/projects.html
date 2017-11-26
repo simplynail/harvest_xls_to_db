@@ -1,0 +1,77 @@
+<!--
+takes variables:
+projects: list of dicts
+dates: list of [min,max] file edit dates
+plots: code for bokeh plots(list of lists [script,div])
+-->
+{% extends "base.html" %}
+
+{% block title %}
+Summary for {{projects|length}} HVAC spreadsheets
+{% endblock %}
+
+
+{% block scripts %}
+
+{% for plot in plots %}
+    {{ plot[0]|safe }}
+{% endfor %}
+
+{% endblock %}
+
+
+{% block content %}
+
+Wykresy ponizej sa podsumowniem {{projects|length}} akruszy HVAC
+</br>uzywanych w projectach Arup Warszawa w okresie {{dates[0]}} - {{dates[0]}} (daty modyfikacji)
+</br></br>
+<a href="#project_list">Lista wykorzystanych projektow</a>
+
+</br></br>
+<table style="width:100%">
+
+{% for plot in plots %}
+<tr><td>
+    {{ plot[1]|safe }}
+    </br></br>
+</tr></td>
+{% endfor %}
+
+<tr><td>
+    <div>
+        <h2 id="project_list">Lista projektow</h2>
+        </br>Ponizej znajduje sie lista arkuszy HVAC wykorzystanych w powyzszych wykresach
+        </br></br>
+        
+        <i>
+        jesli zauwazysz blad w kategoryzacji projektow
+        </br>tj. wykresy pokazują inną wersję arkusza niż ta wykorzystywana w rzeczywistosci
+        </br>zglos prosze ta informacje do <a href="mailto:pawel.cwiek@arup.com?Subject=HVAC%20wykresy-Uwagi%20do%20projektow" target="_top">Pawla Cwieka</a>
+        </i>
+        </br></br>
+        
+        <table style="width:100%">
+          <tr>
+            <th>JN</th>
+            <th>Nazwa</th>
+            <th>Data modyfikacji</th>
+            <th>Sciezka pliku</th>
+            <th>Rozpoznana wersja arkusza</th>
+          </tr>
+          
+        {% for p in projects %}
+          <tr>
+            <td>{{p.number}}</td>
+            <td>{{p.name}}</td>
+            <td>{{p.date_modified}}</td>
+            <td width="60%">{{p.path}}</td>
+            <td>{{p.spreadsheet_version}}</td>
+          </tr>
+        {% endfor %}
+        
+        </table>
+    </div>
+</tr></td>
+</table>
+
+{% endblock %}
